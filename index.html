@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>Baccarat DNA x,/ 17 Systems PRO V10</title>
+
+<style>
+body{
+
+  margin:0;
+  font-family:Segoe UI,Arial;
+  color:#e5e7eb;
+  overflow-x:hidden;
+
+  /* 🎨 Gradient เคลื่อนไหว */
+  background: linear-gradient(
+    120deg,
+    #020617,
+    #0f172a,
+    #020617,
+    #1e293b
+  );
+  background-size: 400% 400%;
+  animation: bgMove 12s ease infinite;
+}
+
+/* 🎞️ animation */
+@keyframes bgMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  top:-20%;
+  left:-20%;
+  width:140%;
+  height:140%;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(59,130,246,0.25), transparent 40%),
+    radial-gradient(circle at 70% 60%, rgba(239,68,68,0.25), transparent 40%),
+    radial-gradient(circle at 50% 80%, rgba(34,197,94,0.2), transparent 40%);
+  z-index:-1;
+  animation: glowMove 18s linear infinite;
+}
+
+/* 🔥 เคลื่อนช้าๆ */
+@keyframes glowMove{
+  0%{transform:translate(0,0)}
+  50%{transform:translate(-3%,3%)}
+  100%{transform:translate(0,0)}
+}
+
+/* ===== BLINK ===== */
+@keyframes blink {
+  0%,100%{opacity:1}
+  50%{opacity:.35}
+}
+.blink{animation:blink .9s infinite}
+
+/* ===== TOP BAR ===== */
+.logo-box{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  text-align:center;
+}
+
+.bet-bar{
+  font-size:18px;
+  font-weight:bold;
+  padding:6px 18px;
+  border-radius:8px;
+  min-width:220px;
+  text-align:center;
+}
+.bet-bar.p{background:#0ea5e9}
+.bet-bar.b{background:#ef4444}
+
+.count-bar{
+  margin-left:14px;
+  font-size:11px;
+  font-weight:bold;
+  opacity:.85;
+}
+.btns{margin-left:auto}
+.btns button{
+  width:64px;
+  height:28px;
+  margin-left:6px;
+  font-weight:bold;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+/* ===== MAIN ===== */
+.main {
+  display: flex;
+  flex-direction: column;  /* วางระบบ 12 สายด้านบน */
+  padding: 10px;
+  gap: 10px;              /* ช่องว่างระหว่างระบบกับ bead road */
+}
+
+.left {
+  width: 100%;            /* ครอบสาย 12 ให้เต็มความกว้าง */
+}
+
+/* ===== BEAD ROAD ===== */
+.bead-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+canvas#bead{
+  width:420px;
+  height:160px;
+  border-radius:14px;
+  background:#ffffff;
+  box-shadow:
+    0 10px 25px rgba(0,0,0,.6),
+    inset 0 0 10px rgba(0,0,0,.15);
+}
+
+/* ===== SYSTEM LIST ===== */
+.sys-row{
+  display:flex;
+  align-items:center;
+  padding:10px 20px;
+  border-radius:5px;
+  font-size:15px;
+  line-height:1.2;
+  gap:4px;
+}
+.sys-row:hover{
+  transform:translateX(6px);
+  box-shadow:0 5px 15px rgba(0,0,0,.5);
+}
+.sys-row.hotP{background:#022c44}
+.sys-row.hotB{background:#3f0a0a}
+.sys-row:nth-child(odd){background:#020617}
+.sys-name{
+    width:170px;
+    font-weight:bold;
+}
+.sys-bet{width:22px;text-align:center;font-weight:bold}
+.sys-pair{width:95px;font-size:10px}
+.sys-hist{
+  display:grid;
+  grid-template-columns: repeat(20, 14px); /* 20 ช่อง */
+  gap:2px;
+  margin-left:6px;
+}
+
+.sys-hist span{
+  width:14px;
+  height:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:10px;
+  font-weight:bold;
+
+  border-radius:3px;
+}
+
+/* ✔ ชนะ */
+.sys-hist .win{
+  background:#22c55e;
+  color:#022c22;
+}
+
+/* ❌ แพ้ */
+.sys-hist .lose{
+  background:#ef4444;
+  color:#3f0a0a;
+}
+
+/* ===== ROADS ===== */
+.roads{
+  flex:1;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:28px;
+}
+canvas{
+  width:420px;
+  height:160px;
+  border-radius:14px;
+}
+#bead{background:#ffffff}
+#big{
+  background:#020617;
+  border:1px solid #1f2933;
+}
+
+/* ===== QUICK VIEW ===== */
+.quick-box{
+  position:fixed;
+  right:20px;
+  top:140px; /* 🔥 ระดับเดียวกับ bead */
+  width:160px;
+  backdrop-filter: blur(10px);
+  background: rgba(15,23,42,0.75);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:12px;
+  padding:10px;
+  box-shadow:0 10px 25px rgba(0,0,0,.4);
+  font-size:12px;
+  z-index:999;
+}
+
+.quick-title{
+  font-weight:bold;
+  margin-bottom:6px;
+  text-align:center;
+  font-size:13px;
+  color:#facc15;
+}
+
+.quick-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:3px 0;
+  padding:3px 6px;
+  border-radius:6px;
+}
+
+.quick-row.p{background:#0c4a6e}
+.quick-row.b{background:#7f1d1d}
+
+.quick-name{width:55px}
+.quick-bet{
+  font-weight:bold;
+  width:18px;
+  text-align:center;
+}
+.quick-per{
+  font-size:11px;
+  opacity:.9;
+}
+
+html, body{
+  height:100%;
+  overflow-y:auto;   /* ✅ เปิด scroll แนวตั้ง */
+  overflow-x:hidden;
+}
+
+.glass{
+  backdrop-filter: blur(12px);
+  background: rgba(15,23,42,0.6);
+  border:1px solid rgba(255,255,255,0.08);
+  box-shadow:0 10px 30px rgba(0,0,0,.5);
+}
+
+/* ===== QUICK TOP 1 BLINK ===== */
+@keyframes blinkStrong {
+  0%,100%{opacity:1; transform:scale(1)}
+  50%{opacity:.2; transform:scale(1.25)}
+}
+
+.quick-per.top1{
+  animation: blinkStrong 0.8s infinite;
+  color:#facc15; /* 🔥 สีทอง */
+  font-weight:bold;
+}
+
+.quick-row.top1{
+  box-shadow:0 0 12px rgba(250,204,21,0.7);
+}
+
+.logo{
+  font-size:20px;
+  font-weight:800;
+  letter-spacing:1px;
+  margin-right:14px;
+
+  /* 🎨 Gradient ตัวอักษร */
+  background: linear-gradient(90deg,#38bdf8,#a78bfa,#facc15);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* ✨ Glow */
+  text-shadow:
+    0 0 8px rgba(56,189,248,.6),
+    0 0 12px rgba(167,139,250,.5),
+    0 0 16px rgba(250,204,21,.4);
+
+  animation: logoGlow 3s ease-in-out infinite;
+}
+
+@keyframes logoGlow{
+  0%,100%{filter:brightness(1)}
+  50%{filter:brightness(1.4)}
+}
+
+.top{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  height:56px;
+  padding:0 12px;
+  flex-wrap:wrap; /* 🔥 สำคัญ */
+}
+.logo-box{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  text-align:center;
+  pointer-events:none;
+}
+
+.logo-sub{
+  font-size:9px;
+  opacity:.6;
+  letter-spacing:1px;
+}
+
+#betBar{
+  margin-left:120px;
+}
+
+
+#betBar{
+  z-index:1;
+}
+#expireBox{
+  z-index:1;
+  margin-left:10px;
+}
+
+@media (max-width: 768px){
+
+  .top{
+    height:auto;
+    padding:8px;
+    gap:6px;
+  }
+
+  .logo-box{
+    position:static;          /* 🔥 ยกเลิก absolute */
+    transform:none;
+    width:100%;
+    order:-1;                 /* 🔥 ดันขึ้นบนสุด */
+  }
+
+  #betBar{
+    margin:0;
+    flex:1;
+  }
+
+  #expireBox{
+    width:100%;
+    text-align:center;
+    margin-top:4px;
+  }
+
+  .btns{
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+  }
+}
+
+.logo{
+  font-size:clamp(14px, 2vw, 20px);
+}
+
+.bead-box{
+  position:relative;
+}
+
+#countOverlay{
+  position:absolute;
+  top:6px;
+  left:8px;
+
+  display:flex;
+  gap:6px;
+  align-items:center;
+
+  font-size:11px;
+  font-weight:bold;
+
+  padding:4px 10px;
+  border-radius:10px;
+
+  background:rgba(0,0,0,0.55);
+  backdrop-filter: blur(6px);
+
+  box-shadow:0 4px 10px rgba(0,0,0,.5);
+}
+
+.count-badge{
+  padding:2px 6px;
+  border-radius:6px;
+  font-size:10px;
+  font-weight:bold;
+}
+
+.count-p{background:#3b82f6;color:#fff}
+.count-b{background:#ef4444;color:#fff}
+.count-t{background:#22c55e;color:#022c22}
+.count-total{
+  background:#111827;
+  color:#e5e7eb;
+}
+.bead-wrapper{
+  scroll-margin-top:80px;
+}
+@keyframes slowBlink {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+/* 🔥 กระพริบช้ามาก + นุ่ม */
+.bet-bar.slow-blink {
+  animation: slowBlink 3.5s ease-in-out infinite;
+}
+/* ===== MINI BEAD ROAD ===== */
+.mini-bead-box{
+  position:fixed;
+  right:280px;
+  top:315px;      /* อยู่ใต้ QuickView */
+
+  width:185px;
+
+  padding:8px;
+
+  border-radius:16px;
+
+  background:
+    linear-gradient(
+      160deg,
+      rgba(20,30,55,.95),
+      rgba(8,12,25,.95)
+    );
+
+  border:1px solid rgba(255,255,255,.08);
+
+  backdrop-filter:blur(14px);
+
+  box-shadow:
+      0 10px 30px rgba(0,0,0,.45),
+      inset 0 1px 0 rgba(255,255,255,.05);
+
+  z-index:999;
+}
+
+.mini-title{
+    text-align:center;
+    font-size:12px;
+    font-weight:bold;
+    color:#facc15;
+    margin-bottom:8px;
+}
+
+#miniBead{
+    background:#fff;
+    border-radius:10px;
+    display:block;
+    margin:auto;
+    box-shadow:
+      inset 0 0 8px rgba(0,0,0,.15);
+}
+
+.mini-count{
+    display:flex;
+    justify-content:center;
+    gap:4px;
+    margin-top:8px;
+    flex-wrap:wrap;
+}
+
+.mini-count span{
+    padding:2px 6px;
+    border-radius:6px;
+    font-size:10px;
+    font-weight:bold;
+}
+
+.mP{background:#2563eb;color:#fff;}
+.mB{background:#ef4444;color:#fff;}
+.mT{background:#22c55e;color:#052e16;}
+.mAll{background:#111827;color:#fff;}
+</style>
+</head>
+
+<body>
+
+
+  <!-- ===== LOGIN SCREEN ===== -->
+<div id="loginScreen" style="
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:#020617;
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:9999;
+">
+
+  <div style="
+    background:#0b1220;
+    padding:30px;
+    border-radius:12px;
+    width:260px;
+    text-align:center;
+    border:1px solid #1f2933;
+  ">
+    <h3>LOGIN</h3>
+
+    <input id="user" placeholder="Username" style="width:100%;margin:6px 0;padding:6px">
+    <input id="pass" type="password" placeholder="Password" style="width:100%;margin:6px 0;padding:6px">
+
+    <button onclick="login()" style="width:100%;margin-top:10px;height:32px;">เข้าสู่ระบบ</button>
+
+    <div id="loginError" style="color:#ef4444;margin-top:8px;font-size:12px;"></div>
+  </div>
+
+</div>
+
+<div class="logo-box">
+  <div class="logo">DNA 17 X PRO</div>
+  <div class="logo-sub">AI Baccarat System</div>
+</div>
+
+<div class="top">
+  <div id="betBar" class="bet-bar">P 0% | B 0%</div>
+  
+
+  <div id="expireBox" style="
+margin-left:20px;
+font-size:10px;
+color:#facc15;
+font-weight:bold;
+"></div>
+
+
+  <div class="btns">
+    <button onclick="play('P')">P</button>
+    <button onclick="play('B')">B</button>
+    <button onclick="play('T')">T</button>
+    <button onclick="undo()">UNDO</button>
+    <button onclick="clearAll()">CLEAR</button>
+  </div>
+</div>
+
+<div class="main">
+  <div class="left" id="systems"></div>
+</div>
+
+<!-- ✅ ย้าย bead มาตรงนี้ -->
+<div class="bead-wrapper">
+  
+  <div class="bead-box">
+    <canvas id="bead" width="420" height="160"></canvas>
+
+    <!-- 🔥 COUNT OVERLAY -->
+    <div id="countOverlay"></div>
+  </div>
+
+</div>
+
+<div id="quickView" class="quick-box glass">
+  <div class="quick-title">TOP 1</div>
+  <div id="quickList"></div>
+</div>
+<div class="mini-bead-box">
+
+    <div class="mini-title">
+        MINI BEAD ROAD
+    </div>
+
+    <canvas
+        id="miniBead"
+        width="150"
+        height="90">
+    </canvas>
+
+    <div
+        class="mini-count"
+        id="miniCount">
+    </div>
+
+</div>
+
+<script>
+
+    // ===== LOGIN CONFIG =====
+const USERNAME = "1234";
+const PASSWORD = "1234";
+
+// วันหมดอายุ: 14 กรกฎาคม พ.ศ. 2569 (พ.ศ.)
+const EXPIRE_DATE = new Date(2026, 6, 14); // เดือนนับจาก 0 → 3 = April
+
+
+  function showExpireDate(){
+  const d = EXPIRE_DATE;
+
+  // แปลงเป็น พ.ศ.
+  const thaiYear = d.getFullYear() + 543;
+
+  const text = `วันหมดอายุ: ${d.getDate()}/${d.getMonth()+1}/${thaiYear}`;
+
+  document.getElementById("expireBox").innerText = text;
+}
+
+
+function login(){
+  const u = document.getElementById("user").value;
+  const p = document.getElementById("pass").value;
+
+  if(u === USERNAME && p === PASSWORD){
+
+    // เช็ควันหมดอายุ
+    const now = new Date();
+
+    if(now > EXPIRE_DATE){
+      document.getElementById("loginError").innerText = "หมดอายุแล้ว";
+      return;
+    }
+
+    document.getElementById("loginScreen").style.display = "none";
+    showExpireDate(); // แสดงวันหมดอายุบนหน้าโปรแกรม
+
+  }else{
+    document.getElementById("loginError").innerText = "user หรือ pass ผิด";
+  }
+}
+
+/* ===== CONSTANTS ===== */
+const ROWS=6,COLS=40;
+const CELL_BIG=12,CELL_BEAD=14;
+const DOT=5,FONT=8,MAX_MARK=999;
+
+/* ===== CENTER ===== */
+function centerOffset(c,cell){
+  return{
+    ox:Math.max(10,(c.width-COLS*cell)/2),
+    oy:Math.max(10,(c.height-ROWS*cell)/2)
+  }
+}
+
+
+
+/* ===== DNA LOGIC (เดิม 100%) ===== */
+const dna_follow=h=>h.at(-1)||null;
+const dna_oppo=h=>h.length?(h.at(-1)==="P"?"B":"P"):null;
+const dna_2same=h=>h.length>=2&&h.at(-1)===h.at(-2)?h.at(-1):dna_oppo(h);
+const dna_chop = h => {
+  if(h.length < 2) return null;
+
+  const last = h.at(-1);
+  const prev = h.at(-2);
+
+  // ถ้าเริ่มเป็น run → ไม่ chop
+  if(last === prev){
+    return last; // ตามแทน
+  }
+
+  // ถ้าเป็น chop → เล่น chop
+  return last === "P" ? "B" : "P";
+};
+
+const dna_run3=h=>h.length>=3&&h.at(-1)===h.at(-2)&&h.at(-2)===h.at(-3)?h.at(-1):dna_oppo(h);
+
+const dna_balance = h => {
+  if(h.length < 2) return null;
+
+  let p = 0, b = 0;
+
+  for(let i = Math.max(0, h.length - 6); i < h.length; i++){
+    if(h[i] === "P") p++;
+    else if(h[i] === "B") b++;
+  }
+
+  return p <= b ? "P" : "B";
+};
+
+const dna_last5 = h => {
+  if(h.length < 5) return null;
+
+  const p = h.slice(-5).filter(v => v === "P").length;
+  const b = h.slice(-5).filter(v => v === "B").length;
+
+  if(p > b) return "P";
+  if(b > p) return "B";
+  return null; // 🔥 เท่ากัน = ไม่เล่น
+};
+
+const dna_cutrun=h=>h.length>=4&&new Set(h.slice(-4)).size===1?(h.at(-1)==="P"?"B":"P"):dna_follow(h);
+const dna_trend = h => {
+  if(h.length < 6) return null;
+
+  const p = h.slice(-6).filter(v => v === "P").length;
+  const b = h.slice(-6).filter(v => v === "B").length;
+
+  if(p > b) return "P";
+  if(b > p) return "B";
+  return null;
+};
+
+const dna_anti2=h=>h.length>=2&&h.at(-1)===h.at(-2)?dna_oppo(h):h.at(-1);
+const dna_anti1_2=h=>{
+ if(h.length<2)return h.at(-1)||null;
+ const a1=dna_oppo(h),
+       a2=h.at(-1)===h.at(-2)?dna_oppo(h):h.at(-1);
+ return a1===a2?a1:h.at(-1);
+};
+const dna_anti3=h=>h.length>=3&&h.at(-1)===h.at(-2)&&h.at(-2)===h.at(-3)?dna_oppo(h):h.at(-1);
+const dna_entropy7 = h => {
+  if (h.length < 7) return null;
+
+  const last7 = h.slice(-7);
+
+  let changes = 0;
+  for (let i = 1; i < last7.length; i++) {
+    if (last7[i] !== last7[i - 1]) changes++;
+  }
+
+  const p = last7.filter(x => x === "P").length;
+  const b = last7.filter(x => x === "B").length;
+
+  const last = h.at(-1);
+
+  if (changes >= 5) return last === "P" ? "B" : "P";
+  if (p > b) return "P";
+  if (b > p) return "B";
+
+  return null;
+};
+
+// ===== DNA 12 =====
+const dna_zigzag = h => {
+
+    // ยังไม่มีข้อมูล
+    if(h.length === 0) return "P";
+
+    // มีไม่ถึง 3 ตา ตามตาล่าสุด
+    if(h.length < 3) return h.at(-1);
+
+    const a = h.at(-3);
+    const b = h.at(-2);
+    const c = h.at(-1);
+
+    // เกิด ZigZag เช่น PBP หรือ BPB
+    if(a !== b && b !== c){
+        return c === "P" ? "B" : "P";
+    }
+
+    // ไม่ใช่ ZigZag → ตามตาล่าสุด
+    return c;
+};
+
+// ===== DNA 13 =====
+const dna_momentum = h => {
+  if(h.length < 8) return null;
+
+  let score = 0;
+
+  h.slice(-8).forEach(v=>{
+    score += v==="P" ? 1 : -1;
+  });
+
+  if(score >= 2) return "P";
+  if(score <= -2) return "B";
+
+  return null;
+};
+// ===== DNA 14 =====
+const dna_switch2 = h => {
+  if(h.length < 2) return null;
+
+  const a = h.at(-2);
+  const b = h.at(-1);
+
+  if(a !== b){
+    return a;
+  }
+
+  return b;
+};
+
+// ===== DNA 15 =====
+const dna_last3 = h => {
+  if(h.length < 3) return null;
+
+  const p = h.slice(-3).filter(x=>x==="P").length;
+  const b = h.slice(-3).filter(x=>x==="B").length;
+
+  if(p>b) return "P";
+  if(b>p) return "B";
+
+  return h.at(-1);
+};
+// ===== DNA 16 =====
+const dna_weightFlow = h=>{
+
+    if(h.length===0) return "P";
+
+    const w=[1,2,3,4,5,6];
+
+    let p=0,b=0;
+
+    const s=h.slice(-6);
+
+    for(let i=0;i<s.length;i++){
+
+        if(s[i]=="P")
+            p+=w[w.length-s.length+i];
+        else
+            b+=w[w.length-s.length+i];
+
+    }
+
+    if(p>b) return "P";
+    if(b>p) return "B";
+
+    return h.at(-1);
+
+};
+
+
+// ===== DNA 17 =====
+const dna_phaseShift = h=>{
+
+    if(h.length===0) return "P";
+
+    const s=h.slice(-8);
+
+    let p1=0,b1=0,p2=0,b2=0;
+
+    s.slice(0,4).forEach(x=>{
+        if(x=="P") p1++;
+        else b1++;
+    });
+
+    s.slice(4).forEach(x=>{
+        if(x=="P") p2++;
+        else b2++;
+    });
+
+    const old=Math.abs(p1-b1);
+    const now=Math.abs(p2-b2);
+
+    if(now>=old){
+
+        if(p2>=b2) return "P";
+
+        return "B";
+
+    }
+
+    if(p2>=b2) return "B";
+
+    return "P";
+
+};
+const SYSTEMS = [
+
+  ["01. ตามน้ำ", dna_follow],
+  ["02. สวนน้ำ", dna_oppo],
+  ["03. สองตัวซ้ำ", dna_2same],
+  ["04. ปิงปอง", dna_chop],
+  ["05. สามตัวซ้ำ", dna_run3],
+  ["06. สมดุล", dna_balance],
+  ["07. ห้าตาล่าสุด", dna_last5],
+  ["08. ตัดมังกร", dna_cutrun],
+  ["09. เกาะเทรนด์", dna_trend],
+
+  ["10. ANTI 1-2+", h => {
+    if (h.length < 2) return h.at(-1) || null;
+
+    const a1 = dna_oppo(h);
+    const a2 = h.at(-1) === h.at(-2)
+      ? dna_oppo(h)
+      : h.at(-1);
+
+    return a1 === a2 ? a1 : dna_oppo(h);
+  }],
+
+  ["11. DNA เอนโทรปี 7", dna_entropy7],
+  ["12. DNA ZigZag", dna_zigzag],
+  ["13. DNA Momentum", dna_momentum],
+  ["14. DNA สลับ 2", dna_switch2],
+  ["15. DNA 3 ตาล่าสุด", dna_last3],
+  ["16. DNA น้ำหนักต่อเนื่อง", dna_weightFlow],
+  ["17. DNA จังหวะสลับช่วง", dna_phaseShift]
+
+];
+
+class Engine{
+ constructor(){
+  this.h = []; // 🔥 ต้องมี
+
+  this.play = Array(SYSTEMS.length).fill(0);
+  this.win  = Array(SYSTEMS.length).fill(0);
+  this.mark = [...Array(SYSTEMS.length)].map(()=>[]);
+ }
+ predict(){return SYSTEMS.map(s=>s[1](this.h))}
+ update(v){
+  const p=this.predict();this.h.push(v);
+  p.forEach((x,i)=>{
+    if(!x)return;
+    this.play[i]++;
+    x===v?(this.win[i]++,this.mark[i].push("/")):this.mark[i].push("x");
+    if(this.mark[i].length>MAX_MARK)this.mark[i].shift();
+  });
+ }
+ pair(i){
+  if(!this.play[i])return[0,0];
+  const p=Math.floor(this.win[i]/this.play[i]*100);
+  return[p,100-p];
+ }
+ reset(){
+  this.h=[];this.play.fill(0);this.win.fill(0);
+  this.mark.forEach(m=>m.length=0);
+ }
+}
+
+const eng=new Engine();
+
+let bead=[];
+
+/* ===== RADAR ===== */
+function radar(){
+
+  let p = 0, b = 0;
+
+  const preds = eng.predict();
+
+  let agree = 0;
+
+const pCount = preds.filter(x => x === "P").length;
+const bCount = preds.filter(x => x === "B").length;
+
+agree = Math.max(pCount,bCount);
+
+const agreeSide =
+    pCount > bCount ? "P" :
+    bCount > pCount ? "B" :
+    "-";
+
+  const agreePercent =
+    Math.round((agree / SYSTEMS.length) * 100);
+
+  preds.forEach((x,i)=>{
+    if(!x) return;
+
+    const [wp, wb] = eng.pair(i); // winrate P / B
+    const weight = Math.max(wp, wb); // 🔥 ใช้ % สูงสุดเป็นน้ำหนัก
+
+     // 🔥 ใส่ตรงนี้
+    if(weight < 45) return;
+
+
+    if(x === "P") p += weight;
+    if(x === "B") b += weight;
+  });
+
+  const total = p + b || 1;
+
+return {
+  p: Math.round(p * 100 / total),
+  b: Math.round(b * 100 / total),
+  side: p > b ? "P" : b > p ? "B" : null,
+
+  agree,
+  agreePercent,
+  agreeSide
+};
+}
+
+/* ===== DRAW ===== */
+
+const beadCanvas=document.getElementById("bead");
+
+function draw(){
+
+  drawBead();
+
+  drawMiniBead();
+
+  renderSystems();
+
+  renderQuickView();
+
+  updateTop();
+
+}
+
+
+function drawBead(){
+ const ctx=beadCanvas.getContext("2d");
+ ctx.clearRect(0,0,9999,9999);
+ const o=centerOffset(beadCanvas,CELL_BEAD);
+ bead.forEach((v,i)=>{
+  const r=i%ROWS,c=Math.floor(i/ROWS);if(c>=COLS)return;
+  const x=o.ox+c*CELL_BEAD+CELL_BEAD/2;
+  const y=o.oy+r*CELL_BEAD+CELL_BEAD/2;
+  ctx.fillStyle=v==="P"?"#3b82f6":v==="B"?"#ef4444":"#22c55e";
+  ctx.beginPath();ctx.arc(x,y,DOT,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle="#fff";ctx.font=`bold ${FONT}px Arial`;
+  ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(v,x,y);
+ });
+}
+
+function drawMiniBead(){
+
+    const c=document.getElementById("miniBead");
+    const ctx=c.getContext("2d");
+
+    ctx.clearRect(0,0,c.width,c.height);
+
+    const cell=10;
+    const rows=6;
+
+    bead.forEach((v,i)=>{
+
+        const r=i%rows;
+        const col=Math.floor(i/rows);
+
+        if(col>14) return;
+
+        const x=8+col*cell;
+        const y=8+r*cell;
+
+        ctx.beginPath();
+        ctx.arc(x,y,3.5,0,Math.PI*2);
+
+        ctx.fillStyle=
+            v=="P"
+            ?"#3b82f6"
+            :v=="B"
+            ?"#ef4444"
+            :"#22c55e";
+
+        ctx.fill();
+
+    });
+
+    const p=bead.filter(x=>x=="P").length;
+    const b=bead.filter(x=>x=="B").length;
+    const t=bead.filter(x=>x=="T").length;
+
+    document.getElementById("miniCount").innerHTML=`
+        <span class="mP">P ${p}</span>
+        <span class="mB">B ${b}</span>
+        <span class="mT">T ${t}</span>
+        <span class="mAll">${bead.length}</span>
+    `;
+}
+function renderSystems(){
+ const box=document.getElementById("systems");
+ box.innerHTML="";
+ const r=radar();
+
+ const preds = eng.predict(); // ✅ เรียกครั้งเดียว
+
+ SYSTEMS.forEach((s,i)=>{
+  const [p,b]=eng.pair(i);
+
+  let cls="sys-row";
+  if(r.side==="P" && p>b)cls+=" hotP blink";
+  if(r.side==="B" && b>p)cls+=" hotB blink";
+
+  const row=document.createElement("div");
+  row.className=cls;
+
+row.innerHTML=`
+ <div class="sys-name">${s[0]}</div>
+ <div class="sys-bet">${preds[i]||""}</div>
+ <div class="sys-pair">P ${p}% / B ${b}%</div>
+ <div class="sys-hist">
+   ${eng.mark[i].map(x=>{
+     const cls = x === "/" ? "win" : "lose";
+     return `<span class="${cls}">${x}</span>`;
+   }).join("")}
+ </div>
+`;
+
+box.appendChild(row);
+ });
+}
+
+function updateTop(){
+ const r=radar();
+ const bar=document.getElementById("betBar");
+bar.textContent =
+`P ${r.p}% | B ${r.b}% | ${r.agreeSide} ตรงกัน ${r.agree}/${SYSTEMS.length} (${r.agreePercent}%)`;
+if(r.side===null){
+  bar.className="bet-bar";
+}else{
+  bar.className = "bet-bar " + (r.side==="P"?"p":"b") + " slow-blink";
+}
+if (r.agreeSide === "P") {
+  bar.style.boxShadow = "0 0 12px rgba(59,130,246,0.8)";
+} 
+else if (r.agreeSide === "B") {
+  bar.style.boxShadow = "0 0 12px rgba(239,68,68,0.8)";
+} 
+else {
+  bar.style.boxShadow = "none";
+}
+ const p=bead.filter(v=>v==="P").length;
+ const b=bead.filter(v=>v==="B").length;
+ const t=bead.filter(v=>v==="T").length;
+document.getElementById("countOverlay").innerHTML = `
+  <span class="count-badge count-p">P ${p}</span>
+  <span class="count-badge count-b">B ${b}</span>
+  <span class="count-badge count-t">T ${t}</span>
+  <span class="count-badge count-total">= ${bead.length}</span>
+`;
+}
+/* ===== ACTIONS ===== */
+function play(v){
+ bead.push(v);
+
+
+ // ✅ กัน T ไม่ให้เข้า Engine
+ if(v !== "T"){
+   eng.update(v);
+ }
+
+ draw();
+}
+
+
+function undo(){
+ if(!bead.length)return;
+ bead.pop();
+ eng.reset();
+
+ bead.forEach(v=>{
+   if(v !== "T"){
+     eng.update(v);
+   }
+ });
+
+ draw();
+}
+
+function clearAll(){
+  if(!confirm("ต้องการล้างข้อมูลทั้งหมด?")) return;
+
+  bead = [];
+  eng.reset();
+  draw();
+}
+
+function renderQuickView(){
+  const box = document.getElementById("quickList");
+  box.innerHTML = "";
+
+  const preds = eng.predict();
+
+  let arr = SYSTEMS.map((s,i)=>{
+    const [p,b] = eng.pair(i);
+    const bet = preds[i];
+
+    if(!bet) return null;
+
+    let percent = 0;
+    if(bet === "P") percent = p;
+    if(bet === "B") percent = b;
+
+    return {
+      name:s[0],
+      bet,
+      percent
+    };
+  }).filter(x=>x !== null);
+
+  // เรียงจาก % สูงสุด
+  arr.sort((a,b)=>b.percent - a.percent);
+
+  // 🔥 เหลือแค่ Top 1
+  const x = arr[0];
+  if(!x) return;
+
+  const row = document.createElement("div");
+  row.className = "quick-row " + (x.bet === "P" ? "p" : "b") + " top1";
+
+  row.innerHTML = `
+    <div class="quick-name">${x.name}</div>
+    <div class="quick-bet">${x.bet}</div>
+    <div class="quick-per top1">${x.percent}%</div>
+   `;
+
+  box.appendChild(row);
+}
+
+
+draw();
+</script>
+</body>
+</html>
